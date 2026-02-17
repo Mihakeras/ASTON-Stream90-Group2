@@ -17,8 +17,8 @@ public class ListStudents {
         return students;
     }
 
-    public void sortedListStudent(){
+    /*public void sortedListStudent(){
         students.sort(ForSorted.numberOfGroup.thenComparing(ForSorted.averageGrade).thenComparing(ForSorted.numberOfRecordBook));
-    }
+    }*/
 
 }

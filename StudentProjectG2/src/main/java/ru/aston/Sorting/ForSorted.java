@@ -1,4 +1,4 @@
-package ru.aston.model.Sorting;
+package ru.aston.Sorting;
 
 import ru.aston.model.Student;
 
