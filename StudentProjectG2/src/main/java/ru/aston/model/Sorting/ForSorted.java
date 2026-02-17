@@ -1,4 +1,6 @@
-package ru.aston.model;
+package ru.aston.model.Sorting;
+
+import ru.aston.model.Student;
 
 import java.util.Comparator;
 
