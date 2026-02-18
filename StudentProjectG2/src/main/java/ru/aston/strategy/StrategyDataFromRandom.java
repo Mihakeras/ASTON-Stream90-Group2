@@ -5,9 +5,9 @@ import ru.aston.model.Student;
 import java.util.List;
 import java.util.Random;
 
-public class StartegyDataFromRandom implements ContractForDataMining {
+public class StrategyDataFromRandom implements ContractForDataMining {
 
-    public void arrayInput(List<Student> studentList) {
+    public void getData(List<Student> studentList) {
 
         int rngCount = new Random().nextInt(1, 30);
 
