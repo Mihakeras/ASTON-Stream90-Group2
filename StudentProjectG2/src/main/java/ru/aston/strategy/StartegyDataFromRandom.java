@@ -1,7 +1,11 @@
+package ru.aston.strategy;
+
+import ru.aston.model.Student;
+
 import java.util.List;
 import java.util.Random;
 
-public class RNGInput implements ArrayInputStrategy {
+public class StartegyDataFromRandom implements ContractForDataMining {
 
     public void arrayInput(List<Student> studentList) {
 
@@ -14,7 +18,7 @@ public class RNGInput implements ArrayInputStrategy {
             averageGrade = new Random().nextInt(1, 5);
             numberOfRecordBook = new Random().nextInt(100000, 999999);
 
-            studentList.add(new Student.StudentBuilder(numberOfGroup, averageGrade, numberOfRecordBook)
+            studentList.add(new Student.BuilderStudent(numberOfGroup, averageGrade, numberOfRecordBook)
                     .setNumberOfGroup(numberOfGroup)
                     .setAverageGrade(averageGrade)
                     .setNumberOfRecordBook(numberOfRecordBook)
