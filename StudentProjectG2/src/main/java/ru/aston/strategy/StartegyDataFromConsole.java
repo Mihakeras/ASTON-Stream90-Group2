@@ -1,7 +1,11 @@
+package ru.aston.strategy;
+
+import ru.aston.model.Student;
+
 import java.util.List;
 import java.util.Scanner;
 
-public class ManualInput implements ArrayInputStrategy {
+public class StartegyDataFromConsole implements ContractForDataMining {
 
     public void arrayInput(List<Student> studentList) {
 
@@ -61,7 +65,7 @@ public class ManualInput implements ArrayInputStrategy {
                     break;
                 }
 
-                studentList.add(new Student.StudentBuilder(numberOfGroup, averageGrade, numberOfRecordBook)
+                studentList.add(new Student.BuilderStudent(numberOfGroup, averageGrade, numberOfRecordBook)
                         .setNumberOfGroup(numberOfGroup)
                         .setAverageGrade(averageGrade)
                         .setNumberOfRecordBook(numberOfRecordBook)
