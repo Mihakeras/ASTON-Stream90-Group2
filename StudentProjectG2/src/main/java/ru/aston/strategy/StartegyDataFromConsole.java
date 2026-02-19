@@ -11,15 +11,15 @@ public class StartegyDataFromConsole implements ContractForDataMining {
 
     // Метод для проверки строки с консоли и возвращения значения в типе Integer
 
-    private int getValueInCount(Scanner consol, int numberOperation, StudentValidator validator){
+    private int getValueInCount(Scanner consol, int numberOperation){
         int valueCount;
         String valueCountOnString;
         while (true){
             valueCountOnString = consol.nextLine();
-            if(isInteger(valueCountOnString) &&
-                    (numberOperation == 1 ? validator.validateGroup(Integer.parseInt(valueCountOnString))
-                    : numberOperation == 2 ? validator.validateAverage(Integer.parseInt(valueCountOnString))
-                    :validator.validateRecordBook(Integer.parseInt(valueCountOnString)))){
+            if(StudentValidator.isInteger(valueCountOnString) &&
+                    (numberOperation == 1 ? StudentValidator.validateGroup(Integer.parseInt(valueCountOnString))
+                    : numberOperation == 2 ? StudentValidator.validateAverage(Integer.parseInt(valueCountOnString))
+                    :StudentValidator.validateRecordBook(Integer.parseInt(valueCountOnString)))){
                 valueCount = Integer.parseInt(valueCountOnString);
                 break;
             }else {
@@ -45,7 +45,6 @@ public class StartegyDataFromConsole implements ContractForDataMining {
 
     @Override
     public List<Student> getData(int countStudents) {
-        StudentValidator validator = new StudentValidator();
         int numberOperation;
         int numberOfGroup;
         int averageGrade;
@@ -58,13 +57,13 @@ public class StartegyDataFromConsole implements ContractForDataMining {
             System.out.println("Ввод данных нового студента");
             System.out.println("Введите номер группы:");
             numberOperation = 1;
-            numberOfGroup = getValueInCount(consol,numberOperation,validator);
+            numberOfGroup = getValueInCount(consol,numberOperation);
             System.out.println("Введите средний балл:");
             numberOperation = 2;
-            averageGrade = getValueInCount(consol,numberOperation,validator);
+            averageGrade = getValueInCount(consol,numberOperation);
             System.out.println("Введите номер зачетной книжки:");
             numberOperation = 3;
-            numberOfRecordBook = getValueInCount(consol,numberOperation,validator);
+            numberOfRecordBook = getValueInCount(consol,numberOperation);
             students.add(Student.builderStudent().
                     setNumberOfGroup(numberOfGroup).
                     setAverageGrade(averageGrade).
