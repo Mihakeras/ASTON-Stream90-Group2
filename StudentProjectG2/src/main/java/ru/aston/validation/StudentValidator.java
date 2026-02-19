@@ -14,7 +14,7 @@ public class StudentValidator {
 
     //валидация номера зачетной книжки
     public static boolean validateRecordBook(int record){
-        return record >= 1000000 && record <= 9999999;
+        return record >= 100000 && record <= 999999;
     }
 
     //общий метод валидации для удобства вызова в стратегиях
