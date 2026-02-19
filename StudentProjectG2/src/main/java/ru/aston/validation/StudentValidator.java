@@ -21,4 +21,13 @@ public class StudentValidator {
     public static boolean isValid(int group, int avg, int record) {
         return validateGroup(group) && validateAverage(avg) && validateRecordBook(record);
     }
+    public static boolean isInteger(String str) {
+        if (str == null) return false;
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
