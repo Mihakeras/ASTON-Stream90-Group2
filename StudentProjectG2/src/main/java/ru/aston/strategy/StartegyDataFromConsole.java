@@ -1,86 +1,79 @@
 package ru.aston.strategy;
 
 import ru.aston.model.Student;
+import ru.aston.validation.StudentValidator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class StartegyDataFromConsole implements ContractForDataMining {
 
-    public void arrayInput(List<Student> studentList) {
+    // Метод для проверки строки с консоли и возвращения значения в типе Integer
 
+    private int getValueInCount(Scanner consol, int numberOperation, StudentValidator validator){
+        int valueCount;
+        String valueCountOnString;
+        while (true){
+            valueCountOnString = consol.nextLine();
+            if(isInteger(valueCountOnString) &&
+                    (numberOperation == 1 ? validator.validateGroup(Integer.parseInt(valueCountOnString))
+                    : numberOperation == 2 ? validator.validateAverage(Integer.parseInt(valueCountOnString))
+                    :validator.validateRecordBook(Integer.parseInt(valueCountOnString)))){
+                valueCount = Integer.parseInt(valueCountOnString);
+                break;
+            }else {
+                System.out.println("Введите коректное значение: ");
+            }
+        }
+        return valueCount;
+    }
+
+    // Метод для проверки возможности преобразовать String в Integer
+
+    public static boolean isInteger(String str) {
+        if (str == null) return false;
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    //Реализация переопределенного метода интерфейса ContractForDataMining
+
+    @Override
+    public List<Student> getData(int countStudents) {
+        StudentValidator validator = new StudentValidator();
+        int numberOperation;
         int numberOfGroup;
         int averageGrade;
         int numberOfRecordBook;
+        List<Student> students = new ArrayList<Student>();
+        Scanner consol = new Scanner(System.in);
 
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("\nВведите длину списка: ");
-
-        if (input.hasNextInt()) {
-            int manualCount = input.nextInt();
-            do {
-                System.out.print("\nВведите номер группы: ");
-                input = new Scanner(System.in);
-                if (input.hasNextInt()) {
-                    numberOfGroup = input.nextInt();
-                } else {
-                    studentList.clear();
-                    System.out.println("\n---Введите корректное значение---");
-                    break;
-                }
-                if (!(numberOfGroup >= 1 && numberOfGroup <= 10)) {
-                    studentList.clear();
-                    System.out.println("\n---Введите корректное значение---");
-                    break;
-                }
-
-                System.out.print("\nВведите средний балл: ");
-                input = new Scanner(System.in);
-                if (input.hasNextInt()) {
-                    averageGrade = input.nextInt();
-                } else {
-                    studentList.clear();
-                    System.out.println("\n---Введите корректное значение---");
-                    break;
-                }
-                if (!(averageGrade >= 1 && averageGrade <= 5)) {
-                    studentList.clear();
-                    System.out.println("\n---Введите корректное значение---");
-                    break;
-                }
-
-                System.out.print("\nВведите номер зачётной книжки: ");
-                input = new Scanner(System.in);
-                if (input.hasNextInt()) {
-                    numberOfRecordBook = input.nextInt();
-                } else {
-                    studentList.clear();
-                    System.out.println("\n---Введите корректное значение---");
-                    break;
-                }
-                if (!(numberOfRecordBook >= 100000 && numberOfRecordBook <= 999999)) {
-                    studentList.clear();
-                    System.out.println("\n---Введите корректное значение---");
-                    break;
-                }
-
-                studentList.add(new Student.BuilderStudent(numberOfGroup, averageGrade, numberOfRecordBook)
-                        .setNumberOfGroup(numberOfGroup)
-                        .setAverageGrade(averageGrade)
-                        .setNumberOfRecordBook(numberOfRecordBook)
-                        .build());
-                manualCount--;
-
-            } while (manualCount > 0);
-
-        } else {
-            studentList.clear();
-            System.out.println("\n---Введите корректное значение---");
+        while (countStudents >= students.size()){
+            numberOperation = 0;
+            System.out.println("Ввод данных нового студента");
+            System.out.println("Введите номер группы:");
+            numberOperation = 1;
+            numberOfGroup = getValueInCount(consol,numberOperation,validator);
+            System.out.println("Введите средний балл:");
+            numberOperation = 2;
+            averageGrade = getValueInCount(consol,numberOperation,validator);
+            System.out.println("Введите номер зачетной книжки:");
+            numberOperation = 3;
+            numberOfRecordBook = getValueInCount(consol,numberOperation,validator);
+            students.add(Student.builderStudent().
+                    setNumberOfGroup(numberOfGroup).
+                    setAverageGrade(averageGrade).
+                    setNumberOfRecordBook(numberOfRecordBook).
+                    build());
+            System.out.print("\n");
         }
 
-        if (!studentList.isEmpty()) {
-            System.out.println("\nСписок заполнен");
-        }
+        System.out.println("Список заполнен");
+        return students;
     }
 }
