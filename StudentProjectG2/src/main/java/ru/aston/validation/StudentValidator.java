@@ -2,19 +2,32 @@ package ru.aston.validation;
 
 public class StudentValidator {
 
+    //валидация номера группы
     public static boolean validateGroup(int group){
         return group > 0 && group < 20;
     }
 
+    //валидация среднего балла
     public static boolean validateAverage(int avg){
-        return avg >= 0 && avg <=5;
+        return avg >= 1 && avg <=5;
     }
 
+    //валидация номера зачетной книжки
     public static boolean validateRecordBook(int record){
-        return record > 0;
+        return record >= 1000000 && record <= 9999999;
     }
 
+    //общий метод валидации для удобства вызова в стратегиях
     public static boolean isValid(int group, int avg, int record) {
         return validateGroup(group) && validateAverage(avg) && validateRecordBook(record);
+    }
+    public static boolean isInteger(String str) {
+        if (str == null) return false;
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
