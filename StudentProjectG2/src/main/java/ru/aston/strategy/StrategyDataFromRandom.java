@@ -2,23 +2,26 @@ package ru.aston.strategy;
 
 import ru.aston.model.Student;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class StrategyDataFromRandom implements ContractForDataMining {
 
-    public void getData(List<Student> studentList) {
+    public List<Student> getData(int count) {
 
         int rngCount = new Random().nextInt(1, 30);
 
         int numberOfGroup, averageGrade, numberOfRecordBook;
+
+        List<Student> students = new ArrayList<Student>();
 
         do {
             numberOfGroup = new Random().nextInt(1, 10);
             averageGrade = new Random().nextInt(1, 5);
             numberOfRecordBook = new Random().nextInt(100000, 999999);
 
-            studentList.add(new Student.BuilderStudent(numberOfGroup, averageGrade, numberOfRecordBook)
+            students.add(Student.builderStudent()
                     .setNumberOfGroup(numberOfGroup)
                     .setAverageGrade(averageGrade)
                     .setNumberOfRecordBook(numberOfRecordBook)
@@ -28,5 +31,6 @@ public class StrategyDataFromRandom implements ContractForDataMining {
         } while (rngCount > 0);
 
         System.out.println("\nСписок заполнен");
+        return students;
     }
 }
