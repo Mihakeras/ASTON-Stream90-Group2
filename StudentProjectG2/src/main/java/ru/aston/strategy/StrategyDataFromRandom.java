@@ -1,6 +1,7 @@
 package ru.aston.strategy;
 
 import ru.aston.model.Student;
+import ru.aston.validation.StudentValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +20,23 @@ public class StrategyDataFromRandom implements ContractForDataMining {
             averageGrade = new Random().nextInt(1, 5+1);
             numberOfRecordBook = new Random().nextInt(100000, 999999+1);
 
-            students.add(Student.builderStudent()
-                    .setNumberOfGroup(numberOfGroup)
-                    .setAverageGrade(averageGrade)
-                    .setNumberOfRecordBook(numberOfRecordBook)
-                    .build());
-            numberOfStudents--;
-
+            if (StudentValidator.isValid(numberOfGroup, averageGrade, numberOfRecordBook)) {
+                students.add(Student.builderStudent()
+                        .setNumberOfGroup(numberOfGroup)
+                        .setAverageGrade(averageGrade)
+                        .setNumberOfRecordBook(numberOfRecordBook)
+                        .build());
+                numberOfStudents--;
+            } else {
+                students.clear();
+                System.out.println("Ошибка в коде");
+            }
         } while (numberOfStudents > 0);
 
-        System.out.println("\nСписок заполнен");
+        if (!students.isEmpty()) {
+            System.out.println("\nСписок заполнен");
+        }
+
         return students;
     }
 }
