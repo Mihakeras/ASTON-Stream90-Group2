@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ContractForDataMining {
 
-    List<Student> getData(int count);
+    List<Student> getData(int numberOfStudents);
 }
