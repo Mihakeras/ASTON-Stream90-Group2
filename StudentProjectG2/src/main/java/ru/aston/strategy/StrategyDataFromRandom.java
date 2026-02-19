@@ -8,16 +8,14 @@ import java.util.Random;
 
 public class StrategyDataFromRandom implements ContractForDataMining {
 
-    public List<Student> getData(int count) {
-
-        int rngCount = new Random().nextInt(1, 30);
+    public List<Student> getData(int numberOfStudents) {
 
         int numberOfGroup, averageGrade, numberOfRecordBook;
 
         List<Student> students = new ArrayList<>();
 
         do {
-            numberOfGroup = new Random().nextInt(1, 10);
+            numberOfGroup = new Random().nextInt(1, 20);
             averageGrade = new Random().nextInt(1, 5);
             numberOfRecordBook = new Random().nextInt(100000, 999999);
 
@@ -26,9 +24,9 @@ public class StrategyDataFromRandom implements ContractForDataMining {
                     .setAverageGrade(averageGrade)
                     .setNumberOfRecordBook(numberOfRecordBook)
                     .build());
-            rngCount--;
+            numberOfStudents--;
 
-        } while (rngCount > 0);
+        } while (numberOfStudents > 0);
 
         System.out.println("\nСписок заполнен");
         return students;
