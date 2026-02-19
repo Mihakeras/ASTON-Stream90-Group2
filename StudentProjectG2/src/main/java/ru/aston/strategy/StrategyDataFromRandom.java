@@ -14,7 +14,7 @@ public class StrategyDataFromRandom implements ContractForDataMining {
 
         int numberOfGroup, averageGrade, numberOfRecordBook;
 
-        List<Student> students = new ArrayList<Student>();
+        List<Student> students = new ArrayList<>();
 
         do {
             numberOfGroup = new Random().nextInt(1, 10);
