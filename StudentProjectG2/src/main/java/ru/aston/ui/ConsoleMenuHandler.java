@@ -1,4 +1,313 @@
-package StudentProjectG2.src.main.java.ru.aston.ui;
+package ru.aston.ui;
 
+import ru.aston.model.Student;
+import ru.aston.sorting.StudentSorter;
+import ru.aston.strategy.StartegyDataFromConsole;
+import ru.aston.strategy.StrategyDataFromJSONFile;
+import ru.aston.strategy.StrategyDataFromRandom;
+import ru.aston.strategy.ContractForDataMining;
+import ru.aston.file.JSONFileReader;
+import ru.aston.validation.StudentValidator;
+
+import java.util.*;
+
+
+ // Класс для обработки пользовательского меню (User Interface)
 public class ConsoleMenuHandler {
+
+     // Список студентов, с которым работает программа.
+    private List<Student> students;
+
+     // Сканер для чтения ввода пользователя.
+    private final Scanner scanner;
+
+     // Сортировщик студентов.
+    private final StudentSorter sorter;
+
+    /**
+     * Конструктор обработчика меню.
+     * Инициализирует все необходимые компоненты.
+     */
+    public ConsoleMenuHandler() {
+        this.students = new ArrayList<>();
+        this.scanner = new Scanner(System.in);
+        this.sorter = new StudentSorter();
+    }
+
+    /**
+     * Запускает основной цикл программы.
+     * Отображает меню и обрабатывает выбор пользователя.
+     */
+    public void start() {
+        boolean running = true;
+
+        while (running) {
+            // Отображаем главное меню
+            displayMainMenu();
+
+            // Получаем выбор пользователя
+            int choice = readIntInput("Выберите пункт меню: ", 1, 5);
+
+            // Обрабатываем выбор
+            switch (choice) {
+                case 1:
+                    generateDataMenu();
+                    break;
+                case 2:
+                    sortStudents();
+                    break;
+                case 3:
+                    displayStudents();
+                    break;
+                case 4:
+                    clearData();
+                    break;
+                case 5:
+                    running = false;
+                    System.out.println("\nДо свидания!");
+                    break;
+                default:
+                    System.out.println("Неверный выбор. Пожалуйста, попробуйте снова.");
+            }
+        }
+    }
+
+    /**
+     * Отображает главное меню.
+     */
+    private void displayMainMenu() {
+        System.out.println("\n┌────────────────────────────────────────────────┐");
+        System.out.println("│                  ГЛАВНОЕ МЕНЮ                   │");
+        System.out.println("├────────────────────────────────────────────────┤");
+        System.out.println("│ Текущее количество студентов: " + padRight(String.valueOf(students.size()), 16) + "│");
+        System.out.println("├────────────────────────────────────────────────┤");
+        System.out.println("│ 1. Сгенерировать данные                         │");
+        System.out.println("│ 2. Отсортировать студентов                      │");
+        System.out.println("│ 3. Показать студентов                           │");
+        System.out.println("│ 4. Очистить данные                              │");
+        System.out.println("│ 5. Выход                                        │");
+        System.out.println("└────────────────────────────────────────────────┘");
+    }
+
+    /**
+     * Меню генерации данных.
+     */
+    private void generateDataMenu() {
+        System.out.println("\n┌────────────────────────────────────────────────┐");
+        System.out.println("│                 ГЕНЕРАЦИЯ ДАННЫХ                 │");
+        System.out.println("├────────────────────────────────────────────────┤");
+        System.out.println("│ 1. Случайная генерация                          │");
+        System.out.println("│ 2. Ручной ввод                                  │");
+        System.out.println("│ 3. Загрузка из JSON файла                       │");
+        System.out.println("│ 4. Назад                                        │");
+        System.out.println("└────────────────────────────────────────────────┘");
+
+        int choice = readIntInput("Выберите способ: ", 1, 4);
+
+        if (choice == 4) {
+            return;
+        }
+
+        ContractForDataMining strategy = null;
+
+        switch (choice) {
+            case 1:
+                // Случайная генерация
+                int randomCount = readIntInput("Сколько студентов сгенерировать? (1-100): ", 1, 100);
+                strategy = new StrategyDataFromRandom();
+                break;
+
+            case 2:
+                // Ручной ввод
+                int manualCount = readIntInput("Сколько студентов ввести? (1-20): ", 1, 20);
+                strategy = new Stra;
+                break;
+
+            case 3:
+                // Загрузка из файла
+                System.out.print("Введите имя JSON файла: ");
+                String filename = scanner.nextLine().trim();
+                strategy = new JSONFileReader(filename);
+                break;
+        }
+
+        if (strategy != null) {
+            System.out.println("\n" + strategy.getDescription());
+            List<Student> newStudents = strategy.getData();
+
+            if (!newStudents.isEmpty()) {
+                students.addAll(newStudents);
+                System.out.println("Добавлено студентов: " + newStudents.size());
+            } else {
+                System.out.println("Не удалось добавить студентов");
+            }
+        }
+    }
+
+    /**
+     * Сортировка студентов.
+     */
+    private void sortStudents() {
+        if (students.isEmpty()) {
+            System.out.println("Нет данных для сортировки. Сначала сгенерируйте данные.");
+            return;
+        }
+
+        System.out.println("\n┌────────────────────────────────────────────────┐");
+        System.out.println("│               СОРТИРОВКА СТУДЕНТОВ               │");
+        System.out.println("├────────────────────────────────────────────────┤");
+        System.out.println("│ Сортировка по всем трем полям:                  │");
+        System.out.println("│   1. Номер группы (по возрастанию)              │");
+        System.out.println("│   2. Средний балл (по возрастанию)              │");
+        System.out.println("│   3. Номер зачетки (по возрастанию)             │");
+        System.out.println("└────────────────────────────────────────────────┘");
+
+        System.out.print("Начать сортировку? (y/n): ");
+        String confirm = scanner.nextLine().trim().toLowerCase();
+
+        if (confirm.equals("y")) {
+            try {
+                // Выполняем сортировку
+                sorter.sort(students);
+
+                System.out.println("Сортировка успешно завершена!");
+
+                // Показываем предпросмотр
+                showPreview(5);
+
+            } catch (Exception e) {
+                System.err.println("Ошибка при сортировке: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Сортировка отменена.");
+        }
+    }
+
+    /**
+     * Отображает всех студентов.
+     */
+    private void displayStudents() {
+        if (students.isEmpty()) {
+            System.out.println("Нет студентов для отображения.");
+            return;
+        }
+
+        System.out.println("\n┌────────────────────────────────────────────────────────────────┐");
+        System.out.println("│                        СПИСОК СТУДЕНТОВ                         │");
+        System.out.println("├────────────────────────────────────────────────────────────────┤");
+        System.out.println("│ Всего студентов: " + padRight(String.valueOf(students.size()), 45) + "│");
+        System.out.println("└────────────────────────────────────────────────────────────────┘");
+
+        // Разбиваем на страницы по 10 студентов
+        int pageSize = 10;
+        int totalPages = (students.size() + pageSize - 1) / pageSize;
+
+        for (int page = 0; page < totalPages; page++) {
+            int start = page * pageSize;
+            int end = Math.min(start + pageSize, students.size());
+
+            System.out.println("\n┌────────────────────────────────────────────────────────────────┐");
+            System.out.println("│ Страница " + padRight((page + 1) + " из " + totalPages, 48) + "│");
+            System.out.println("├────────────────────────────────────────────────────────────────┤");
+
+            for (int i = start; i < end; i++) {
+                System.out.printf("│ %3d. %-60s │%n", i + 1, students.get(i));
+            }
+
+            System.out.println("└────────────────────────────────────────────────────────────────┘");
+
+            if (page < totalPages - 1) {
+                System.out.print("\nНажмите Enter для продолжения...");
+                scanner.nextLine();
+            }
+        }
+    }
+
+    /**
+     * Очищает данные.
+     */
+    private void clearData() {
+        if (students.isEmpty()) {
+            System.out.println("Данные уже пусты.");
+            return;
+        }
+
+        System.out.print("Вы уверены? Все данные будут удалены. (y/n): ");
+        String confirm = scanner.nextLine().trim().toLowerCase();
+
+        if (confirm.equals("y")) {
+            students.clear();
+            System.out.println("Все данные удалены.");
+        } else {
+            System.out.println("Операция отменена.");
+        }
+    }
+
+    /**
+     * Показывает предпросмотр первых N студентов.
+     *
+     * @param count количество студентов для предпросмотра
+     */
+    private void showPreview(int count) {
+        int previewCount = Math.min(count, students.size());
+        if (previewCount > 0) {
+            System.out.println("\nПервые " + previewCount + " студентов:");
+            for (int i = 0; i < previewCount; i++) {
+                System.out.println("  " + (i + 1) + ". " + students.get(i));
+            }
+        }
+    }
+
+    /**
+     * Вспомогательный метод для выравнивания текста справа.
+     *
+     * @param text текст для выравнивания
+     * @param width ширина поля
+     * @return текст с пробелами слева
+     */
+    private String padRight(String text, int width) {
+        return String.format("%-" + width + "s", text);
+    }
+
+    /**
+     * Безопасное чтение целого числа с валидацией.
+     *
+     * @param minmax переменнная для проверки диапазона ввода
+     * @param min минимальное допустимое значение
+     * @param max максимальное допустимое значение
+     * @return введенное число
+     */
+    private int readIntInput(String minmax, int min, int max) {
+        while (true) {
+            try {
+                System.out.print(minmax);
+                String input = scanner.nextLine().trim();
+
+                // Проверка на пустой ввод
+                if (input.isEmpty()) {
+                    System.out.println("Ввод не может быть пустым.");
+                    continue;
+                }
+
+                // Проверка на число
+                if (!StudentValidator.isInteger(input)) {
+                    System.out.println("Введите целое положительное число.");
+                    continue;
+                }
+
+                int value = Integer.parseInt(input);
+
+                // Проверка диапазона
+                if (value < min || value > max) {
+                    System.out.println("Введите число от " + min + " до " + max + ".");
+                    continue;
+                }
+
+                return value;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: введите целое число.");
+            }
+        }
+    }
 }
