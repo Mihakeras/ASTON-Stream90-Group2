@@ -46,7 +46,8 @@ public class ConsoleMenuHandler {
             displayMainMenu();
 
             // Получаем выбор пользователя
-            int choice = readIntInput("Выберите пункт меню: ", 1, 5);
+            System.out.println("Выберите пункт меню: ");
+            int choice = readIntInput();
 
             // Обрабатываем выбор
             switch (choice) {
@@ -102,7 +103,8 @@ public class ConsoleMenuHandler {
         System.out.println("│ 4. Назад                                        │");
         System.out.println("└────────────────────────────────────────────────┘");
 
-        int choice = readIntInput("Выберите способ: ", 1, 4);
+        System.out.println("Выберите способ: ");
+        int choice = readIntInput();
 
         if (choice == 4) {
             return;
@@ -113,27 +115,28 @@ public class ConsoleMenuHandler {
         switch (choice) {
             case 1:
                 // Случайная генерация
-                int randomCount = readIntInput("Сколько студентов сгенерировать? (1-100): ", 1, 100);
+                System.out.println("Сколько студентов сгенерировать? (1-100): ");
+                int randomCount = readIntInput();
                 strategy = new StrategyDataFromRandom();
                 break;
 
             case 2:
                 // Ручной ввод
-                int manualCount = readIntInput("Сколько студентов ввести? (1-20): ", 1, 20);
-                strategy = new Stra;
+                System.out.println("Сколько студентов ввести? (1-20): ");
+                int manualCount = readIntInput();
+                strategy = new StartegyDataFromConsole();
                 break;
 
             case 3:
                 // Загрузка из файла
-                System.out.print("Введите имя JSON файла: ");
-                String filename = scanner.nextLine().trim();
-                strategy = new JSONFileReader(filename);
+                System.out.print("Чтение из JSON файла: ");
+                strategy = new StrategyDataFromJSONFile();
                 break;
         }
 
         if (strategy != null) {
-            System.out.println("\n" + strategy.getDescription());
-            List<Student> newStudents = strategy.getData();
+            System.out.println("\n" + "Введите количество студентов: ");
+            List<Student> newStudents = strategy.getData(readIntInput());
 
             if (!newStudents.isEmpty()) {
                 students.addAll(newStudents);
@@ -271,43 +274,16 @@ public class ConsoleMenuHandler {
 
     /**
      * Безопасное чтение целого числа с валидацией.
-     *
-     * @param minmax переменнная для проверки диапазона ввода
-     * @param min минимальное допустимое значение
-     * @param max максимальное допустимое значение
      * @return введенное число
      */
-    private int readIntInput(String minmax, int min, int max) {
+    private int readIntInput() {
+        int value = 0;
         while (true) {
-            try {
-                System.out.print(minmax);
-                String input = scanner.nextLine().trim();
-
-                // Проверка на пустой ввод
-                if (input.isEmpty()) {
-                    System.out.println("Ввод не может быть пустым.");
-                    continue;
-                }
-
-                // Проверка на число
-                if (!StudentValidator.isInteger(input)) {
-                    System.out.println("Введите целое положительное число.");
-                    continue;
-                }
-
-                int value = Integer.parseInt(input);
-
-                // Проверка диапазона
-                if (value < min || value > max) {
-                    System.out.println("Введите число от " + min + " до " + max + ".");
-                    continue;
-                }
-
-                return value;
-
-            } catch (NumberFormatException e) {
-                System.out.println("Ошибка: введите целое число.");
+            String input = scanner.nextLine().trim();
+            if(StudentValidator.isInteger(input)) {
+                value = Integer.parseInt(input);
+                break;
             }
-        }
+        } return value;
     }
 }
