@@ -136,14 +136,15 @@ public class ConsoleMenuHandler {
 
         if (strategy != null) {
             System.out.println("\n" + "Введите количество студентов: ");
-            List<Student> newStudents = strategy.getData(readIntInput());
-
+            students = strategy.getData(readIntInput());
+/*
             if (!newStudents.isEmpty()) {
                 students.addAll(newStudents);
                 System.out.println("Добавлено студентов: " + newStudents.size());
             } else {
                 System.out.println("Не удалось добавить студентов");
             }
+            */
         }
     }
 
@@ -171,7 +172,7 @@ public class ConsoleMenuHandler {
         if (confirm.equals("y")) {
             try {
                 // Выполняем сортировку
-                sorter.sort(students);
+                sorter.sortStudents(students);
 
                 System.out.println("Сортировка успешно завершена!");
 
