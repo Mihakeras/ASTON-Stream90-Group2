@@ -5,7 +5,6 @@ public class StudentValidator {
     //валидация номера группы
     public static boolean validateGroup(int group) {
         if (group >= 0 && group <= 20) {
-            System.out.println(" Группа (" + group + "): Корректно.");
             return true;
         } else {
             System.err.println(" Ошибка в группе: " + group + " (должна быть от 1 до 20)");
@@ -16,7 +15,6 @@ public class StudentValidator {
     //валидация среднего балла
     public static boolean validateAverage(int avg) {
         if (avg >= 1 && avg <= 5) {
-            System.out.println(" Балл (" + avg + "): Корректно.");
             return true;
         } else {
             System.err.println(" Ошибка в баллах: " + avg + " (должны быть от 1 до 5)");
@@ -28,10 +26,9 @@ public class StudentValidator {
     //валидация номера зачетной книжки
     public static boolean validateRecordBook(int record) {
         if (record >= 100000 && record <= 999999) {
-            System.out.println(" Зачетка (" + record + "): Корректно.");
             return true;
         } else {
-            System.err.println(" Ошибка в номере зачетки: " + record + " (должен быть 100000 до 999999)");
+            System.err.println(" Ошибка в номере зачетки: " + record + " (должен состоять из шести чиселлое)");
             return false;
         }
     }
@@ -77,5 +74,6 @@ public class StudentValidator {
             return false;
         }
     }
+
 
 }
