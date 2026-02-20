@@ -2,26 +2,29 @@ package ru.aston.ui;
 
 import ru.aston.model.Student;
 import ru.aston.sorting.StudentSorter;
-import ru.aston.strategy.StartegyDataFromConsole;
-import ru.aston.strategy.StrategyDataFromJSONFile;
-import ru.aston.strategy.StrategyDataFromRandom;
-import ru.aston.strategy.ContractForDataMining;
-import ru.aston.file.JSONFileReader;
+import ru.aston.strategy.*;
 import ru.aston.validation.StudentValidator;
 
 import java.util.*;
 
-
- // Класс для обработки пользовательского меню (User Interface)
+/**
+ * Класс для обработки пользовательского меню (User Interface)
+ */
 public class ConsoleMenuHandler {
 
-     // Список студентов, с которым работает программа.
+    /**
+     * Список студентов, с которым работает программа.
+     */
     private List<Student> students;
 
-     // Сканер для чтения ввода пользователя.
+    /**
+     * Сканер для чтения ввода пользователя.
+     */
     private final Scanner scanner;
 
-     // Сортировщик студентов.
+    /**
+     * Сортировщик студентов.
+     */
     private final StudentSorter sorter;
 
     /**
@@ -46,7 +49,7 @@ public class ConsoleMenuHandler {
             displayMainMenu();
 
             // Получаем выбор пользователя
-            System.out.println("Выберите пункт меню: ");
+            System.out.print("Выберите пункт меню: ");
             int choice = readIntInput();
 
             // Обрабатываем выбор
@@ -65,7 +68,7 @@ public class ConsoleMenuHandler {
                     break;
                 case 5:
                     running = false;
-                    System.out.println("\nДо свидания!");
+                    System.out.println("\nДО СВИДYЛИ!");
                     break;
                 default:
                     System.out.println("Неверный выбор. Пожалуйста, попробуйте снова.");
@@ -77,33 +80,33 @@ public class ConsoleMenuHandler {
      * Отображает главное меню.
      */
     private void displayMainMenu() {
-        System.out.println("\n┌────────────────────────────────────────────────┐");
-        System.out.println("│                  ГЛАВНОЕ МЕНЮ                   │");
-        System.out.println("├────────────────────────────────────────────────┤");
-        System.out.println("│ Текущее количество студентов: " + padRight(String.valueOf(students.size()), 16) + "│");
-        System.out.println("├────────────────────────────────────────────────┤");
-        System.out.println("│ 1. Сгенерировать данные                         │");
-        System.out.println("│ 2. Отсортировать студентов                      │");
-        System.out.println("│ 3. Показать студентов                           │");
-        System.out.println("│ 4. Очистить данные                              │");
-        System.out.println("│ 5. Выход                                        │");
-        System.out.println("└────────────────────────────────────────────────┘");
+        System.out.println("\n╔════════════════════════════════════════════════════╗");
+        System.out.println("║                    ГЛАВНОЕ МЕНЮ                    ║");
+        System.out.println("╠════════════════════════════════════════════════════╣");
+        System.out.println("║  Текущее количество студентов: " + padRight(String.valueOf(students.size()), 20) + "║");
+        System.out.println("╠════════════════════════════════════════════════════╣");
+        System.out.println("║  1. Сгенерировать данные                           ║");
+        System.out.println("║  2. Отсортировать студентов                        ║");
+        System.out.println("║  3. Показать студентов                             ║");
+        System.out.println("║  4. Очистить данные                                ║");
+        System.out.println("║  5. Выход                                          ║");
+        System.out.println("╚════════════════════════════════════════════════════╝");
     }
 
     /**
      * Меню генерации данных.
      */
     private void generateDataMenu() {
-        System.out.println("\n┌────────────────────────────────────────────────┐");
-        System.out.println("│                 ГЕНЕРАЦИЯ ДАННЫХ                 │");
-        System.out.println("├────────────────────────────────────────────────┤");
-        System.out.println("│ 1. Случайная генерация                          │");
-        System.out.println("│ 2. Ручной ввод                                  │");
-        System.out.println("│ 3. Загрузка из JSON файла                       │");
-        System.out.println("│ 4. Назад                                        │");
-        System.out.println("└────────────────────────────────────────────────┘");
+        System.out.println("\n╔════════════════════════════════════════════════════╗");
+        System.out.println("║                   ГЕНЕРАЦИЯ ДАННЫХ                 ║");
+        System.out.println("╠════════════════════════════════════════════════════╣");
+        System.out.println("║  1. Случайная генерация                            ║");
+        System.out.println("║  2. Ручной ввод                                    ║");
+        System.out.println("║  3. Загрузка из JSON файла                         ║");
+        System.out.println("║  4. Назад                                          ║");
+        System.out.println("╚════════════════════════════════════════════════════╝");
 
-        System.out.println("Выберите способ: ");
+        System.out.print("Выберите способ: ");
         int choice = readIntInput();
 
         if (choice == 4) {
@@ -115,14 +118,14 @@ public class ConsoleMenuHandler {
         switch (choice) {
             case 1:
                 // Случайная генерация
-                System.out.println("Сколько студентов сгенерировать? (1-100): ");
+                System.out.print("Сколько студентов сгенерировать? (1-100): ");
                 int randomCount = readIntInput();
                 strategy = new StrategyDataFromRandom();
                 break;
 
             case 2:
                 // Ручной ввод
-                System.out.println("Сколько студентов ввести? (1-20): ");
+                System.out.print("Сколько студентов ввести? (1-20): ");
                 int manualCount = readIntInput();
                 strategy = new StartegyDataFromConsole();
                 break;
@@ -135,16 +138,8 @@ public class ConsoleMenuHandler {
         }
 
         if (strategy != null) {
-            System.out.println("\n" + "Введите количество студентов: ");
+            System.out.print("Введите количество студентов: ");
             students = strategy.getData(readIntInput());
-/*
-            if (!newStudents.isEmpty()) {
-                students.addAll(newStudents);
-                System.out.println("Добавлено студентов: " + newStudents.size());
-            } else {
-                System.out.println("Не удалось добавить студентов");
-            }
-            */
         }
     }
 
@@ -157,14 +152,14 @@ public class ConsoleMenuHandler {
             return;
         }
 
-        System.out.println("\n┌────────────────────────────────────────────────┐");
-        System.out.println("│               СОРТИРОВКА СТУДЕНТОВ               │");
-        System.out.println("├────────────────────────────────────────────────┤");
-        System.out.println("│ Сортировка по всем трем полям:                  │");
-        System.out.println("│   1. Номер группы (по возрастанию)              │");
-        System.out.println("│   2. Средний балл (по возрастанию)              │");
-        System.out.println("│   3. Номер зачетки (по возрастанию)             │");
-        System.out.println("└────────────────────────────────────────────────┘");
+        System.out.println("\n╔════════════════════════════════════════════════════╗");
+        System.out.println("║                 СОРТИРОВКА СТУДЕНТОВ               ║");
+        System.out.println("╠════════════════════════════════════════════════════╣");
+        System.out.println("║  Сортировка по всем трем полям:                    ║");
+        System.out.println("║    1. Номер группы (по возрастанию)                ║");
+        System.out.println("║    2. Средний балл (по возрастанию)                ║");
+        System.out.println("║    3. Номер зачетки (по возрастанию)               ║");
+        System.out.println("╚════════════════════════════════════════════════════╝");
 
         System.out.print("Начать сортировку? (y/n): ");
         String confirm = scanner.nextLine().trim().toLowerCase();
@@ -175,9 +170,6 @@ public class ConsoleMenuHandler {
                 sorter.sortStudents(students);
 
                 System.out.println("Сортировка успешно завершена!");
-
-                // Показываем предпросмотр
-                showPreview(5);
 
             } catch (Exception e) {
                 System.err.println("Ошибка при сортировке: " + e.getMessage());
@@ -196,11 +188,11 @@ public class ConsoleMenuHandler {
             return;
         }
 
-        System.out.println("\n┌────────────────────────────────────────────────────────────────┐");
-        System.out.println("│                        СПИСОК СТУДЕНТОВ                         │");
-        System.out.println("├────────────────────────────────────────────────────────────────┤");
-        System.out.println("│ Всего студентов: " + padRight(String.valueOf(students.size()), 45) + "│");
-        System.out.println("└────────────────────────────────────────────────────────────────┘");
+        System.out.println("\n╔══════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                       СПИСОК СТУДЕНТОВ                           ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════╣");
+        System.out.println("║  Всего студентов: " + padRight(String.valueOf(students.size()), 47) + "║");
+        System.out.println("╚══════════════════════════════════════════════════════════════════╝");
 
         // Разбиваем на страницы по 10 студентов
         int pageSize = 10;
@@ -210,15 +202,15 @@ public class ConsoleMenuHandler {
             int start = page * pageSize;
             int end = Math.min(start + pageSize, students.size());
 
-            System.out.println("\n┌────────────────────────────────────────────────────────────────┐");
-            System.out.println("│ Страница " + padRight((page + 1) + " из " + totalPages, 48) + "│");
-            System.out.println("├────────────────────────────────────────────────────────────────┤");
+            System.out.println("\n╔══════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("║  Страница " + padRight((page + 1) + " из " + totalPages, 67) + "║");
+            System.out.println("╠══════════════════════════════════════════════════════════════════════════════╣");
 
             for (int i = start; i < end; i++) {
-                System.out.printf("│ %3d. %-60s │%n", i + 1, students.get(i));
+                System.out.printf("║  %3d. %-70s ║%n", i + 1, students.get(i));
             }
 
-            System.out.println("└────────────────────────────────────────────────────────────────┘");
+            System.out.println("╚══════════════════════════════════════════════════════════════════════════════╝");
 
             if (page < totalPages - 1) {
                 System.out.print("\nНажмите Enter для продолжения...");
@@ -248,21 +240,6 @@ public class ConsoleMenuHandler {
     }
 
     /**
-     * Показывает предпросмотр первых N студентов.
-     *
-     * @param count количество студентов для предпросмотра
-     */
-    private void showPreview(int count) {
-        int previewCount = Math.min(count, students.size());
-        if (previewCount > 0) {
-            System.out.println("\nПервые " + previewCount + " студентов:");
-            for (int i = 0; i < previewCount; i++) {
-                System.out.println("  " + (i + 1) + ". " + students.get(i));
-            }
-        }
-    }
-
-    /**
      * Вспомогательный метод для выравнивания текста справа.
      *
      * @param text текст для выравнивания
@@ -281,10 +258,13 @@ public class ConsoleMenuHandler {
         int value = 0;
         while (true) {
             String input = scanner.nextLine().trim();
-            if(StudentValidator.isInteger(input)) {
+            if (StudentValidator.isInteger(input)) {
                 value = Integer.parseInt(input);
                 break;
+            } else {
+                System.out.print("Пожалуйста, введите целое число: ");
             }
-        } return value;
+        }
+        return value;
     }
 }
