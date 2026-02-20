@@ -1,8 +1,6 @@
-package ru.aston.file.testutils;
+package ru.aston.strategy;
 
 import ru.aston.model.Student;
-import ru.aston.strategy.ContractForDataMining;
-import ru.aston.strategy.StartegyDataFromConsole;
 
 import java.util.List;
 

@@ -7,6 +7,7 @@ public class TestForJSONFileReader {
         boolean exists = JSONFileReader.checkThatFileExists("students.json");
         boolean isJSON = JSONFileReader.checkIsJSONFile("students.json");
         String contentOfFileAsOneString;
+
         try {
             contentOfFileAsOneString = JSONFileReader.readFileAsOneString("students.json");
         } catch (IOException e) {
