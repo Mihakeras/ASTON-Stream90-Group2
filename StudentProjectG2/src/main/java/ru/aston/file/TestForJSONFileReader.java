@@ -1,7 +1,7 @@
 package ru.aston.file;
 import java.io.IOException;
 
-public class JSONFileReaderTest {
+public class TestForJSONFileReader {
     static void main() {
         //JSONFileReader fileReader = new JSONFileReader(); так нельзя делать, тк методы статичные внутри
         boolean exists = JSONFileReader.checkThatFileExists("students.json");

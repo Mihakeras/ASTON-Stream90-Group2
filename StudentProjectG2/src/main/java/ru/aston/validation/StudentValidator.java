@@ -16,7 +16,7 @@ public class StudentValidator {
     //валидация среднего балла
     public static boolean validateAverage(int avg) {
         if (avg >= 1 && avg <= 5) {
-            System.out.println("✅ Балл (" + avg + "): Корректно.");
+            System.out.println(" Балл (" + avg + "): Корректно.");
             return true;
         } else {
             System.err.println(" Ошибка в баллах: " + avg + " (должны быть от 1 до 5)");
@@ -57,12 +57,25 @@ public class StudentValidator {
     }
 
     public static boolean isInteger(String str) {
-        if (str == null) return false;
+        // Проверка на null
+        if (str == null) {
+            System.err.println(" Ошибка: Входная строка пуста (null).");
+            return false;
+        }
+
         try {
+            // Пробуем преобразовать
             Integer.parseInt(str);
+
+            // Если получилось, выводим подтверждение
+            System.out.println(" Проверка типа: Строка '" + str + "' является целым числом.");
             return true;
+
         } catch (NumberFormatException e) {
+            // Если вылетела ошибка, значит в строке были буквы или спецсимволы
+            System.err.println(" Ошибка типа: '" + str + "' — это не число, а строка или текст.");
             return false;
         }
     }
+
 }
