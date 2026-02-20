@@ -22,23 +22,9 @@ public class StartegyDataFromConsole implements ContractForDataMining {
                     :StudentValidator.validateRecordBook(Integer.parseInt(valueCountOnString)))){
                 valueCount = Integer.parseInt(valueCountOnString);
                 break;
-            }else {
-                System.out.println("Введите коректное значение: ");
             }
         }
         return valueCount;
-    }
-
-    // Метод для проверки возможности преобразовать String в Integer
-
-    public static boolean isInteger(String str) {
-        if (str == null) return false;
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 
     //Реализация переопределенного метода интерфейса ContractForDataMining
