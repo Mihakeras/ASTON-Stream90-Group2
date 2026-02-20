@@ -13,10 +13,10 @@ import java.util.List;
 public class StrategyDataFromJSONFile implements ContractForDataMining {
 
     private static final String FILE_NAME = "students.json";
-    private final StudentValidator validator = new StudentValidator();
+    //private final StudentValidator validator = new StudentValidator();
 
     @Override
-    public List<Student> getData(int count) {
+    public List<Student> getData(int amountOfStudents) {
         List<Student> students = new ArrayList<>(); // Создаем пустой список
 
         try {
@@ -37,9 +37,11 @@ public class StrategyDataFromJSONFile implements ContractForDataMining {
             JSONArray jsonArray = new JSONArray(jsonContent);
 
             // Определяем реальное количество студентов для чтения
-            int studentsToRead = Math.min(count, jsonArray.length());
+            // тут важно понять чего мньше - запрошенных студентов или
+            // имеющихся в файле
+            int studentsToRead = Math.min(amountOfStudents, jsonArray.length());
 
-            if (studentsToRead < count) {
+            if (studentsToRead < amountOfStudents) {
                 System.out.println("⚠️ Внимание: В файле только " + jsonArray.length() + " студентов");
             }
 
@@ -54,12 +56,12 @@ public class StrategyDataFromJSONFile implements ContractForDataMining {
                     int recordBook = jsonObject.getInt("numberOfRecordBook");
 
                     // Валидируем данные
-                    if (validator.validateGroup(group) &&
-                            validator.validateGrade(grade) &&
-                            validator.validateRecordBook(recordBook)) {
+                    if (StudentValidator.validateGroup(group) &&
+                            StudentValidator.validateGroup(grade) &&
+                            StudentValidator.validateRecordBook(recordBook)) {
 
                         // Создаем студента и добавляем в список
-                        Student student = new Student.Builder()
+                        Student student = new Student.BuilderStudent()
                                 .setNumberOfGroup(group)
                                 .setAverageGrade(grade)
                                 .setNumberOfRecordBook(recordBook)
