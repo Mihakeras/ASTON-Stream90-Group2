@@ -28,7 +28,7 @@ public class StudentValidator {
         if (record >= 100000 && record <= 999999) {
             return true;
         } else {
-            System.err.println(" Ошибка в номере зачетки: " + record + " (должен состоять из шести чиселлое)");
+            System.err.println(" Ошибка в номере зачетки: " + record + " (должен состоять из шести чисел)");
             return false;
         }
     }
@@ -45,7 +45,6 @@ public class StudentValidator {
         boolean r = validateRecordBook(record);
 
         if (g && a && r) {
-            System.out.println(" Итог: Все данные верны! Студент создан.");
             return true;
         } else {
             System.err.println(" Итог: Валидация провалена. Студент не будет добавлен.");
