@@ -9,9 +9,9 @@ public class TestStudentValidation {
 
         // --- Тест корректных данных ---
         System.out.println("\nТест 1: Корректные данные");
-        boolean ok1 = StudentValidator.validateGroup(10);
-        boolean ok2 = StudentValidator.validateAverage(4);
-        boolean ok3 = StudentValidator.validateRecordBook(123456);
+        boolean ok1 = StudentValidator.validateGroup(10);//должно быть true
+        boolean ok2 = StudentValidator.validateAverage(4);//должно быть true
+        boolean ok3 = StudentValidator.validateRecordBook(123456);//должно быть true
 
         if (ok1 && ok2 && ok3) {
             System.out.println(" Результат: OK (Валидация пропускает верные данные)");
