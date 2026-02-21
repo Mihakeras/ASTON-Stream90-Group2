@@ -115,24 +115,18 @@ public class ConsoleMenuHandler {
             return;
         }
 
-        ContractForDataMining strategy = null;
-
-        switch (choice) {
-            case 1:
+        ContractForDataMining strategy = switch (choice) {
+            case 1 ->
                 // Случайная генерация
-                strategy = new StrategyDataFromRandom();
-                break;
-
-            case 2:
+                    new StrategyDataFromRandom();
+            case 2 ->
                 // Ручной ввод
-                strategy = new StartegyDataFromConsole();
-                break;
-
-            case 3:
+                    new StartegyDataFromConsole();
+            case 3 ->
                 // Загрузка из JSON-файла
-                strategy = new StrategyDataFromJSONFile();
-                break;
-        }
+                    new StrategyDataFromJSONFile();
+            default -> null;
+        };
 
         if (strategy != null) {
             System.out.println();
@@ -256,7 +250,7 @@ public class ConsoleMenuHandler {
      * @return введенное число
      */
     private int readIntInput() {
-        int value = 0;
+        int value;
         while (true) {
             String input = scanner.nextLine().trim();
             if (StudentValidator.isInteger(input)) {
