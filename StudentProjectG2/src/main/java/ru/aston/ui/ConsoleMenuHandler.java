@@ -120,27 +120,23 @@ public class ConsoleMenuHandler {
         switch (choice) {
             case 1:
                 // Случайная генерация
-                System.out.print("Сколько студентов сгенерировать? (1-100): ");
-                int randomCount = readIntInput();
                 strategy = new StrategyDataFromRandom();
                 break;
 
             case 2:
                 // Ручной ввод
-                System.out.print("Сколько студентов ввести? (1-20): ");
-                int manualCount = readIntInput();
                 strategy = new StartegyDataFromConsole();
                 break;
 
             case 3:
-                // Загрузка из файла
-                System.out.print("Чтение из JSON файла: ");
+                // Загрузка из JSON-файла
                 strategy = new StrategyDataFromJSONFile();
                 break;
         }
 
         if (strategy != null) {
-            System.out.print("Введите количество студентов: ");
+            System.out.println();
+            System.out.print("Введите требуемое количество студентов: ");
             students = strategy.getData(readIntInput());
         }
     }
