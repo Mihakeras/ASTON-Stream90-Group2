@@ -2,7 +2,7 @@ package ru.aston.strategy;
 import ru.aston.model.Student;
 import java.util.List;
 
-public class TestoForStrategyDataFromJSONFile
+public class TestForStrategyDataFromJSONFile
 {
     static void main()
     {
