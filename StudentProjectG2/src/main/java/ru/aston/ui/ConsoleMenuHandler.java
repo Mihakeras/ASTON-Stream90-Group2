@@ -80,15 +80,16 @@ public class ConsoleMenuHandler {
      * Отображает главное меню.
      */
     private void displayMainMenu() {
-        System.out.println("\n╔════════════════════════════════════════════════════╗");
+        System.out.println();
+        System.out.println("╔════════════════════════════════════════════════════╗");
         System.out.println("║                    ГЛАВНОЕ МЕНЮ                    ║");
         System.out.println("╠════════════════════════════════════════════════════╣");
         System.out.println("║  Текущее количество студентов: " + padRight(String.valueOf(students.size()), 20) + "║");
         System.out.println("╠════════════════════════════════════════════════════╣");
-        System.out.println("║  1. Сгенерировать данные                           ║");
-        System.out.println("║  2. Отсортировать студентов                        ║");
-        System.out.println("║  3. Показать студентов                             ║");
-        System.out.println("║  4. Очистить данные                                ║");
+        System.out.println("║  1. Получить список студентов                      ║");
+        System.out.println("║  2. Отсортировать список студентов                 ║");
+        System.out.println("║  3. Показать список студентов                      ║");
+        System.out.println("║  4. Очистить список студентов                      ║");
         System.out.println("║  5. Выход                                          ║");
         System.out.println("╚════════════════════════════════════════════════════╝");
     }
@@ -97,12 +98,13 @@ public class ConsoleMenuHandler {
      * Меню генерации данных.
      */
     private void generateDataMenu() {
-        System.out.println("\n╔════════════════════════════════════════════════════╗");
+        System.out.println();
+        System.out.println("╔════════════════════════════════════════════════════╗");
         System.out.println("║                   ГЕНЕРАЦИЯ ДАННЫХ                 ║");
         System.out.println("╠════════════════════════════════════════════════════╣");
-        System.out.println("║  1. Случайная генерация                            ║");
-        System.out.println("║  2. Ручной ввод                                    ║");
-        System.out.println("║  3. Загрузка из JSON файла                         ║");
+        System.out.println("║  1. Сгенерировать список студентов (рандомно)      ║");
+        System.out.println("║  2. Ввести список студентов вручную из консоли     ║");
+        System.out.println("║  3. Загрузить список студентов из JSON файла       ║");
         System.out.println("║  4. Назад                                          ║");
         System.out.println("╚════════════════════════════════════════════════════╝");
 
@@ -152,10 +154,11 @@ public class ConsoleMenuHandler {
             return;
         }
 
-        System.out.println("\n╔════════════════════════════════════════════════════╗");
-        System.out.println("║                 СОРТИРОВКА СТУДЕНТОВ               ║");
+        System.out.println();
+        System.out.println("╔════════════════════════════════════════════════════╗");
+        System.out.println("║            СПРАВКА: СОРТИРОВКА СТУДЕНТОВ           ║");
         System.out.println("╠════════════════════════════════════════════════════╣");
-        System.out.println("║  Сортировка по всем трем полям:                    ║");
+        System.out.println("║  Сортировка происходит по всем трем полям:         ║");
         System.out.println("║    1. Номер группы (по возрастанию)                ║");
         System.out.println("║    2. Средний балл (по возрастанию)                ║");
         System.out.println("║    3. Номер зачетки (по возрастанию)               ║");
@@ -188,7 +191,8 @@ public class ConsoleMenuHandler {
             return;
         }
 
-        System.out.println("\n╔══════════════════════════════════════════════════════════════════╗");
+        System.out.println();
+        System.out.println("╔══════════════════════════════════════════════════════════════════╗");
         System.out.println("║                       СПИСОК СТУДЕНТОВ                           ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════╣");
         System.out.println("║  Всего студентов: " + padRight(String.valueOf(students.size()), 47) + "║");
@@ -202,7 +206,8 @@ public class ConsoleMenuHandler {
             int start = page * pageSize;
             int end = Math.min(start + pageSize, students.size());
 
-            System.out.println("\n╔══════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println();
+            System.out.println("╔══════════════════════════════════════════════════════════════════════════════╗");
             System.out.println("║  Страница " + padRight((page + 1) + " из " + totalPages, 67) + "║");
             System.out.println("╠══════════════════════════════════════════════════════════════════════════════╣");
 
