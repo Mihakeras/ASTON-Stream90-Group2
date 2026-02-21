@@ -38,7 +38,7 @@ public class StartegyDataFromConsole implements ContractForDataMining {
         List<Student> students = new ArrayList<Student>();
         Scanner consol = new Scanner(System.in);
 
-        while (countStudents >= students.size()){
+        while (countStudents != students.size()){
             numberOperation = 0;
             System.out.println("Ввод данных нового студента");
             System.out.println("Введите номер группы:");
