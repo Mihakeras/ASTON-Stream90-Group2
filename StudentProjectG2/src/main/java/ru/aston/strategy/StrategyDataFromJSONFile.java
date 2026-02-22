@@ -57,7 +57,7 @@ public class StrategyDataFromJSONFile implements ContractForDataMining {
 
                     // Валидируем данные
                     if (StudentValidator.validateGroup(group) &&
-                            StudentValidator.validateGroup(grade) &&
+                            StudentValidator.validateAverage(grade) &&
                             StudentValidator.validateRecordBook(recordBook)) {
 
                         // Создаем студента и добавляем в список
