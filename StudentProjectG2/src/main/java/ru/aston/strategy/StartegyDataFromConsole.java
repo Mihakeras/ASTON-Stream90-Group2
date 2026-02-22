@@ -11,10 +11,11 @@ public class StartegyDataFromConsole implements ContractForDataMining {
 
     // Метод для проверки строки с консоли и возвращения значения в типе Integer
 
-    private int getValueInCount(Scanner consol, AdaptorStudetnValidator operation){
+    private int getValueInCount(Scanner consol, AdaptorStudetnValidator operation, String message){
         int valueCount;
         String valueCountOnString;
         while (true){
+            System.out.print(message);
             valueCountOnString = consol.nextLine();
             if(StudentValidator.isInteger(valueCountOnString) && operation.validator(Integer.parseInt(valueCountOnString))){
                 valueCount = Integer.parseInt(valueCountOnString);
@@ -36,12 +37,9 @@ public class StartegyDataFromConsole implements ContractForDataMining {
 
         while (countStudents != students.size()){
             System.out.println("Ввод данных нового студента");
-            System.out.print("Введите номер группы:");
-            numberOfGroup = getValueInCount(consol, AdaptorStudetnValidator.Group);
-            System.out.print("Введите средний балл:");
-            averageGrade = getValueInCount(consol, AdaptorStudetnValidator.Average);
-            System.out.print("Введите номер зачетной книжки:");
-            numberOfRecordBook = getValueInCount(consol, AdaptorStudetnValidator.RecorBook);
+            numberOfGroup = getValueInCount(consol, AdaptorStudetnValidator.Group,"Введите номер группы: ");
+            averageGrade = getValueInCount(consol, AdaptorStudetnValidator.Average, "Введите средний балл: ");
+            numberOfRecordBook = getValueInCount(consol, AdaptorStudetnValidator.RecorBook,"Введите номер зачетной книжки: ");
             students.add(Student.builderStudent().
                     setNumberOfGroup(numberOfGroup).
                     setAverageGrade(averageGrade).
