@@ -4,10 +4,10 @@ public class StudentValidator {
 
     //валидация номера группы
     public static boolean validateGroup(int group) {
-        if (group >= 0 && group <= 20) {
+        if (group >= 1 && group <= 20) {
             return true;
         } else {
-            System.err.println(" Ошибка в группе: " + group + " (должна быть от 1 до 20)");
+            System.out.println(" Ошибка в группе: " + group + " (должна быть от 1 до 20)");
             return false;
         }
     }
@@ -17,7 +17,7 @@ public class StudentValidator {
         if (avg >= 1 && avg <= 5) {
             return true;
         } else {
-            System.err.println(" Ошибка в баллах: " + avg + " (должны быть от 1 до 5)");
+            System.out.println(" Ошибка в баллах: " + avg + " (должны быть от 1 до 5)");
             return false;
         }
     }
@@ -28,7 +28,7 @@ public class StudentValidator {
         if (record >= 100000 && record <= 999999) {
             return true;
         } else {
-            System.err.println(" Ошибка в номере зачетки: " + record + " (должен состоять из шести чисел)");
+            System.out.println(" Ошибка в номере зачетки: " + record + " (должен состоять из шести цифр)");
             return false;
         }
     }
@@ -37,7 +37,6 @@ public class StudentValidator {
      * Общая проверка всех данных
      */
     public static boolean isValid(int group, int avg, int record) {
-        System.out.println("\n--- Запуск валидации данных ---");
 
         // Проверяем каждое поле
         boolean g = validateGroup(group);
@@ -47,32 +46,25 @@ public class StudentValidator {
         if (g && a && r) {
             return true;
         } else {
-            System.err.println(" Итог: Валидация провалена. Студент не будет добавлен.");
+            System.out.println(" Итог: Валидация провалена. Студент не будет добавлен.");
             return false;
         }
     }
 
     public static boolean isInteger(String str) {
-        // Проверка на null
-        if (str == null) {
-            System.err.println(" Ошибка: Входная строка пуста (null).");
+        if (str == null) { // Проверка на null
+            System.out.println(" Ошибка: Входная строка пуста (null).");
             return false;
         }
 
         try {
-            // Пробуем преобразовать
-            Integer.parseInt(str);
-
-            // Если получилось, выводим подтверждение
-            System.out.println(" Проверка типа: Строка '" + str + "' является целым числом.");
-            return true;
+            Integer.parseInt(str); // Пробуем преобразовать
+            return true; // Если получилось, то возвращаем true
 
         } catch (NumberFormatException e) {
             // Если вылетела ошибка, значит в строке были буквы или спецсимволы
-            System.err.println(" Ошибка типа: '" + str + "' — это не число, а строка или текст.");
+            System.out.println(" Ошибка, вы ввели '" + str + "' — это не число. Введите, пожалуйста, число.");
             return false;
         }
     }
-
-
 }
