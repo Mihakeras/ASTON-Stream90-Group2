@@ -1,3 +1,5 @@
+// Автор — Юкаев Вадим
+
 package ru.aston.strategy;
 
 import ru.aston.model.Student;
@@ -29,7 +31,7 @@ public class StrategyDataFromRandom implements ContractForDataMining {
                 numberOfStudents--;
             } else {
                 students.clear();
-                System.out.println("Ошибка в коде");
+                System.out.println("\nОшибка в коде");
             }
         } while (numberOfStudents > 0);
 

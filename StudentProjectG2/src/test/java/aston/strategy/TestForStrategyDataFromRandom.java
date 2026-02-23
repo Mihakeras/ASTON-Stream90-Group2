@@ -1,3 +1,5 @@
+// Автор — Юкаев Вадим
+
 package aston.strategy;
 
 import ru.aston.model.Student;
