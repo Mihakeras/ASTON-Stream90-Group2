@@ -1,3 +1,4 @@
+// автор Даниил Конев
 package aston.file;
 import ru.aston.file.JSONFileReader;
 import java.io.IOException;
