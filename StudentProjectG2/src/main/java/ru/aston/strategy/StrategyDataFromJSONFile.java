@@ -1,5 +1,4 @@
-
-
+// автор Даниил Конев
 package ru.aston.strategy;
 import ru.aston.model.Student;
 import ru.aston.validation.StudentValidator;
@@ -88,4 +87,5 @@ public class StrategyDataFromJSONFile implements ContractForDataMining {
             return students; // Возвращаем пустой список в случае ошибки
         }
     }
+
 }

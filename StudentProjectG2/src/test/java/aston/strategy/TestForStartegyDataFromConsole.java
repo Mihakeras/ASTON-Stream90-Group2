@@ -1,3 +1,4 @@
+//Котеля Иван
 package aston.strategy;
 
 import ru.aston.model.Student;

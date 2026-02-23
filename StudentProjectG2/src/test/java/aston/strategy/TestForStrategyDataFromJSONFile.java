@@ -1,3 +1,4 @@
+// автор Даниил Конев
 package aston.strategy;
 import ru.aston.model.Student;
 import ru.aston.strategy.StrategyDataFromJSONFile;

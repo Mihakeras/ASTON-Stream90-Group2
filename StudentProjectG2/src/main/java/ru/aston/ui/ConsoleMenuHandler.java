@@ -1,3 +1,4 @@
+// автор - Жданов Михаил
 package ru.aston.ui;
 
 import ru.aston.model.Student;
@@ -257,7 +258,7 @@ public class ConsoleMenuHandler {
                 value = Integer.parseInt(input);
                 break;
             } else {
-                System.out.print("Пожалуйста, введите целое число: ");
+               System.out.print("Выберите пункт меню: ");
             }
         }
         return value;
