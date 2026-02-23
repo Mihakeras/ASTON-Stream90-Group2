@@ -17,7 +17,7 @@ public class StrategyDataFromRandom implements ContractForDataMining {
 
         List<Student> students = new ArrayList<>();
 
-        do {
+        while (numberOfStudents > 0) {
             numberOfGroup = new Random().nextInt(1, 20+1);
             averageGrade = new Random().nextInt(1, 5+1);
             numberOfRecordBook = new Random().nextInt(100000, 999999+1);
@@ -29,11 +29,8 @@ public class StrategyDataFromRandom implements ContractForDataMining {
                         .setNumberOfRecordBook(numberOfRecordBook)
                         .build());
                 numberOfStudents--;
-            } else {
-                students.clear();
-                System.out.println("\nОшибка в коде");
             }
-        } while (numberOfStudents > 0);
+        }
 
         if (!students.isEmpty()) {
             System.out.println("\nСписок заполнен");
