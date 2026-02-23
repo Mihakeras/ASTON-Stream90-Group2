@@ -1,3 +1,4 @@
+//Автор Котеля Иван
 package aston.model;
 
 import ru.aston.model.Student;
