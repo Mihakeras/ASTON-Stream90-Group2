@@ -1,5 +1,4 @@
-package ru.aston.validation;
-
+package aston.validation;
 import ru.aston.validation.StudentValidator;
 
 public class TestStudentValidation {
