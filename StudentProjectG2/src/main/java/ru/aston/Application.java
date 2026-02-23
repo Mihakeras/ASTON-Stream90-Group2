@@ -1,3 +1,4 @@
+// автор - Жданов Михаил
 package ru.aston;
 
 import ru.aston.ui.ConsoleMenuHandler;
