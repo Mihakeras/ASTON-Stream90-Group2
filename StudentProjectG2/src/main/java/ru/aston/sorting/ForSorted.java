@@ -1,3 +1,4 @@
+//Автор Котеля Иван
 package ru.aston.sorting;
 
 import ru.aston.model.Student;
@@ -34,5 +35,5 @@ public enum ForSorted implements Comparator<Student> {
                 return 1;
             return 0;
         }
-    };
+    }
 }
