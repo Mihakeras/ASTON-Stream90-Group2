@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ContractForDataMining {
 
-    abstract List<Student> getData(int numberOfStudents);
+    List<Student> getData(int numberOfStudents);
 }
