@@ -4,22 +4,60 @@ import ru.aston.file.JSONFileReader;
 import java.io.IOException;
 
 public class TestForJSONFileReader {
-    static void main() {
-        //JSONFileReader fileReader = new JSONFileReader(); так нельзя делать, тк методы статичные внутри
-        boolean exists = JSONFileReader.checkThatFileExists("students.json");
-        boolean isJSON = JSONFileReader.checkIsJSONFile("students.json");
-        String contentOfFileAsOneString;
+    static private void positiveTest() {
+        // Позитивные тестовые кейсы
+        String goodFileName = "students.json";
+        String contentOfFileAsOneString = null;
+        boolean isFileExists = false;
+        boolean isJSONfile = false;
 
         try {
-            contentOfFileAsOneString = JSONFileReader.readFileAsOneString("students.json");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            isFileExists = JSONFileReader.checkThatFileExists(goodFileName);
+            isJSONfile = JSONFileReader.checkIsJSONFile(goodFileName);
+            contentOfFileAsOneString = JSONFileReader.readFileAsOneString(goodFileName);
+
+            System.out.println("checkThatFileExists (а файл существует?) -> " + isFileExists);
+            System.out.println("checkIsJSONFile (а это JSON-файл?) -> " + isJSONfile);
+            System.out.println(contentOfFileAsOneString);
+
+        } catch (IOException e) { // обработаю исключение, если файла нет
+            System.err.println("Позитивный тест сообщает: тут ожидалось получить файл с верным именем.");
+            System.err.println("Вот детали ошибки, полученные от e.getMessage(): "+ e.getMessage());
         }
 
-        System.out.println("checkThatFileExists -> " + exists);
-        System.out.println("checkIsJSONFile -> " + isJSON);
-        System.out.println(contentOfFileAsOneString);
+    }
 
+    static private void negativeTest() {
+        // Негативные тестовые кейсы
+        String badFileName = "badStudents.json";
+        String contentOfFileAsOneString = null;
+        boolean isFileExists = false;
+        boolean isJSONfile = false;
+
+        try {
+            isFileExists = JSONFileReader.checkThatFileExists(badFileName);
+            isJSONfile = JSONFileReader.checkIsJSONFile(badFileName);
+            contentOfFileAsOneString = JSONFileReader.readFileAsOneString(badFileName);
+
+            System.out.println("checkThatFileExists (файл существует?) -> " + isFileExists);
+            System.out.println("checkIsJSONFile (это JSON-файл?) -> " + isJSONfile);
+            System.out.println(contentOfFileAsOneString);
+
+        } catch (IOException e) { // обработаю исключение
+            System.err.println("Негативнй тест сообщает: тут ожидаемо не получилось прочитать файл с неверным именем. " +
+                    "Использовался трай-кетч, чтобы приложение не крашнулось.");
+            System.err.println("Вот детали ошибки, полученные от e.getMessage(): "+ e.getMessage());
+        }
+
+    }
+
+
+    static void main() {
+        System.out.println("\n\n\n\n"); // это, чтобы отступить в консоли от предыдущего вывода
+        System.out.println("-".repeat(50)+ "Начался позитивный тест" + "-".repeat(50)); // для оформления заголовка
+        positiveTest(); // вызов позитивного кейса
+        System.out.println("-".repeat(50)+ "Начался негативный тест" + "-".repeat(50)); // для оформления заголовка
+        negativeTest(); // вызов негативного кейса
     }
 }
 
